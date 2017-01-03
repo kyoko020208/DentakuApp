@@ -1,18 +1,28 @@
 //
-//  TableViewController.swift
+//  DetailTableViewController.swift
 //  SampleB
 //
-//  Created by Kyoko Otsuka on 2017/01/01.
+//  Created by Kyoko Otsuka on 2017/01/03.
 //  Copyright © 2017年 Kyoko Otsuka. All rights reserved.
 //
 
 import UIKit
 
-class TableViewController: UITableViewController {
+class DetailTableViewController: UITableViewController {
 
+    @IBOutlet weak var editNameTextField: UITextField!
+    
+    var index: Int?
+    
+    var nameArray:[String]!
+    
+    var editedName:String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        editNameTextField.text = nameArray[index!]
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -24,18 +34,33 @@ class TableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 && indexPath.row == 0 {
+            editNameTextField.becomeFirstResponder()
+        }
+        tableView.delegateRowAtIndexPath(indexPath, animated: true)
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+    
+    ocerride func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "save" {
+            editedName = editNameTextField.text
+        }
     }
+    
+    
+//    // MARK: - Table view data source
+//
+//    override func numberOfSections(in tableView: UITableView) -> Int {
+//        // #warning Incomplete implementation, return the number of sections
+//        return 1
+//    }
+//
+//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        // #warning Incomplete implementation, return the number of rows
+//        return 1
+//    }
 
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
