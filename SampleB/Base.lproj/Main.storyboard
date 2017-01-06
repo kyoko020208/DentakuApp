@@ -497,9 +497,7 @@
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hfW-3o-FSE">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="510"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <string key="text">インストールいただき、ありがとうございます！
-
-本アプリは、飲み会の会費を簡単に計算できるアプリです。
+                                        <mutableString key="text">本アプリは、飲み会の会費を簡単に計算できるアプリです。
 「部長」 「課長」 「女性」 「男性」等、会費の異なるグループを最大4つまで分けて計算できます。
 
 ■計算方法
@@ -514,7 +512,7 @@
 ■デフォルト値設定方法
 ①各グループのデフォルト名称と、人数を設定できます
 
-②グループごとの「＋」 「−」の差額のデフォルト値を設定できます。</string>
+②グループごとの「＋」 「−」の差額のデフォルト値を設定できます。</mutableString>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
