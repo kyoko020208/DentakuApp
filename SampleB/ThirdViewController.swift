@@ -8,26 +8,25 @@
 
 import UIKit
 
-class ThirdViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    
-    
-    @IBOutlet weak var tableView: UITableView!
-    
-    var selectedText: String?
+class ThirdViewController: UITableViewController {
     
     var groups = ["グループ1", "グループ2", "グループ3", "グループ4", "グループ5"]
     
-    var people = ["0人", "0人", "0人", "0人", "0人", "0人"]
+    var numbers = ["0人", "0人", "0人", "0人", "0人", "0人"]
     
     @IBAction func saveToMainViewController(segue:UIStoryboardSegue) {
         
-        let detailViewController = segue.source as! DetailTableViewController
+        let detailViewController = segue.source as! DetailTableViewController3
         
         let index = detailViewController.index
         
-        let nameString = detailViewController.editedName
+        let groupString = detailViewController.editedGroup
         
-        groups[index!] = nameString!
+        let numberString = detailViewController.editedGroup
+        
+        groups[index!] = groupString!
+        
+        numbers[index!] = numberString!
         
         tableView.reloadData()
         
@@ -43,40 +42,41 @@ class ThirdViewController: UIViewController, UITableViewDataSource, UITableViewD
         // Dispose of any resources that can be recreated.
     }
     
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 1
+    }
     
-    func tableView(_ table: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ table: UITableView, numberOfRowsInSection section: Int) -> Int {
         return groups.count
     }
     
-    func tableView(_ table: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ table: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = table.dequeueReusableCell(withIdentifier: "tableCell", for : indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "tableCell", for : indexPath)
         
         cell.textLabel?.text = groups[indexPath.row]
         
-        cell.detailTextLabel?.text = people[indexPath.row]
+        cell.detailTextLabel?.text = numbers[indexPath.row]
         
-        tableView?.tableFooterView = UIView()
+        tableView.tableFooterView = UIView()
         
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        selectedText = groups[indexPath.row]
-        
-        performSegue(withIdentifier: "showEditView", sender: nil)
-    }
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "showEditView") {
-            let EditVC: DetailTableViewController = (segue.destination as? DetailTableViewController)!
+        if segue.identifier == "Edit" {
             
-            EditVC.text = selectedText
+            var path = tableView.indexPathForSelectedRow
+            
+            let detailViewController = segue.destination as! DetailTableViewController3
+         
+            detailViewController.index = path?.row
+            detailViewController.groupArray = groups
+            detailViewController.numberArray = numbers
         }
     }
-    
-    
     
     
 }
