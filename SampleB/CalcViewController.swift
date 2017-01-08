@@ -8,13 +8,13 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class CalcViewController: UIViewController {
     
     let calc = Calc()
     
-    @IBOutlet weak var Formula: UITextField!
+    @IBOutlet weak var Formula: UILabel!
     
-    @IBOutlet weak var Result: UITextField!
+    @IBOutlet weak var Result: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,16 +29,21 @@ class ViewController: UIViewController {
     
     //数字と小数点の入力処理
     //タグ番号は入力値と同じ（小数点はタグ:0)
+    
+    
     @IBAction func Number(_ sender: UIButton) {
         calc.InputNum = (sender.titleLabel?.text)!
         calc.makeNum()
         
         //Formulaに出力
         Formula.text = calc.numbersString[0] + calc.symbolsString[0] + calc.numbersString[1] + calc.symbolsString[1] + calc.numbersString[2]
+        
     }
     
     
+    
     //四則演算の入力処理
+    
     @IBAction func Symbol(_ sender: UIButton) {
         calc.InputSym = (sender.titleLabel?.text)!
         calc.makeSym()
@@ -48,16 +53,19 @@ class ViewController: UIViewController {
     }
     
     
+    
+    
     @IBAction func Calculate(_ sender: UIButton) {
         calc.makeResult()
         
         //Resultに出力(小数点以下は切り捨て
         Result.text = String(Int(calc.resultValue))
+        print(String(Int(calc.resultValue)))
     }
     
     
-    @IBAction func DeleteOne(_ sender: UIButton) {
-        
+    
+    @IBAction func deleteOne(_ sender: UIButton) {
         //Formulaに出力されている文字列を１文字ずつに分解
         let _Formula :NSMutableString = NSMutableString(string: Formula.text!)
         
@@ -87,13 +95,20 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func DeleteAll(_ sender: UIButton) {
-        
+    
+    @IBAction func deleteAll(_ sender: UIButton) {
         //全クリア
         calc.deleteAll()
         Formula.text = ""
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "Back" {
+            let firstViewController:FirstViewController = segue.destination as! FirstViewController
+            
+            firstViewController.sumKin = self.Result.text!
+        }
+    }
 }
 
 
