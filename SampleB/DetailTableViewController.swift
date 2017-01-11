@@ -13,8 +13,14 @@ class DetailTableViewController: UITableViewController {
     
     @IBOutlet weak var editModelTextField: UITextField!
     
-    @IBOutlet weak var ditNumberTextField: UITextField!
     
+    @IBOutlet weak var editNumberTextField: UILabel!
+    
+    @IBOutlet weak var uiStepper: UIStepper!
+    
+    @IBAction func uiChangeStepper(_ sender: UIStepper) {
+        editNumberTextField.text = String("\(Int(sender.value))" + "人")
+    }
     
     var index:Int?
     
@@ -31,7 +37,7 @@ class DetailTableViewController: UITableViewController {
         
         editModelTextField.text = modelArray[index!]
         
-        ditNumberTextField.text = numberArray[index!]
+        editNumberTextField.text = numberArray[index!]
     }
     
     override func didReceiveMemoryWarning() {
@@ -53,7 +59,7 @@ class DetailTableViewController: UITableViewController {
             editModelTextField.becomeFirstResponder()
             print("1")
         } else if indexPath.section == 1 && indexPath.row == 0 {
-            ditNumberTextField.becomeFirstResponder()
+            editNumberTextField.becomeFirstResponder()
             print("2")
         }
         tableView.deselectRow(at: indexPath, animated: true)
@@ -63,7 +69,7 @@ class DetailTableViewController: UITableViewController {
         if segue.identifier == "save" {
             editedModel = editModelTextField.text
             
-            editedNumber = ditNumberTextField.text
+            editedNumber = editNumberTextField.text
         }
         
         

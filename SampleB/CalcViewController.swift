@@ -16,9 +16,13 @@ class CalcViewController: UIViewController {
     
     @IBOutlet weak var Result: UILabel!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
     }
     
     override func didReceiveMemoryWarning() {

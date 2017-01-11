@@ -10,8 +10,6 @@ import UIKit
 
 class FirstViewController: UIViewController, UIViewControllerTransitioningDelegate {
     
-    let calc = Calc()
-    
     var CurrentSagaku: Int = 500
     
     var sumKin: String = ""
@@ -27,6 +25,12 @@ class FirstViewController: UIViewController, UIViewControllerTransitioningDelega
     var sumKingaku: Int = 0
     
     var Sa: Int = 0
+    
+    var index: Int?
+    
+    var models:[String]!
+    
+    var numbers:[String]!
     
     
     //各グループの人数・金額表示
@@ -56,16 +60,24 @@ class FirstViewController: UIViewController, UIViewControllerTransitioningDelega
     //合計金額など
     @IBOutlet weak var SyukeiKingaku: UILabel!
     
-    
     @IBOutlet weak var Sagaku: UILabel!
-    
     
     @IBOutlet weak var GokeiNinzu: UILabel!
     
-    
-    
     @IBOutlet weak var GokeiKingaku: UILabel!
     
+    
+    //グループ名
+    
+    @IBOutlet weak var GroupOneName: UILabel!
+    
+    @IBOutlet weak var GroupTwoName: UILabel!
+    
+    @IBOutlet weak var GroupThreeName: UILabel!
+    
+    @IBOutlet weak var GroupFourName: UILabel!
+    
+    @IBOutlet weak var GroupFiveName: UILabel!
     
     @IBAction func Reset(_ sender: UIButton) {
         for i in 0...4{
@@ -74,6 +86,24 @@ class FirstViewController: UIViewController, UIViewControllerTransitioningDelega
         }
     }
     
+    //
+    //    @IBAction func saveToMainViewController3 (segue: UIStoryboardSegue) {
+    //
+    //        let detailViewController = segue.source as! DetailTableViewController
+    //
+    //        let index = detailViewController.index
+    //
+    //        let modelString = detailViewController.editedModel
+    //
+    //        let numberString = detailViewController.editedNumber
+    //
+    //        models[index!] = modelString!
+    //
+    //        numbers[index!] = numberString!
+    //
+    //        GroupOneName.text = models[0]
+    //
+    //    }
     
     
     //人数加算
@@ -81,6 +111,7 @@ class FirstViewController: UIViewController, UIViewControllerTransitioningDelega
         i = sender.tag - 1
         NinzuPlus()
         NinzuShow()
+        KingakuShow()
     }
     
     //人数減算
@@ -88,6 +119,7 @@ class FirstViewController: UIViewController, UIViewControllerTransitioningDelega
         i = sender.tag - 1
         NinzuMinus()
         NinzuShow()
+        KingakuShow()
     }
     
     @IBAction func KingakuPlus(_ sender: UIButton) {
@@ -132,6 +164,10 @@ class FirstViewController: UIViewController, UIViewControllerTransitioningDelega
         GokeiKingaku.text = sumKin
         SaKeisan()
     }
+    
+
+    
+    
     
     func SaKeisan() {
         Sa = Int(GokeiKingaku.text!)! - sumKingaku
@@ -185,12 +221,19 @@ class FirstViewController: UIViewController, UIViewControllerTransitioningDelega
         }
         GokeiNinzu.text = String(sumNinzu)
         SyukeiKingaku.text = String(sumKingaku)
+        //            String(sumKingaku)
         SaKeisan()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        //        GroupOneName.text = modelArray[0]
+        //        GroupTwoName.text = modelArray[1]
+        //        GroupThreeName.text = modelArray[2]
+        //        GroupFourName.text = modelArray[3]
+        //        GroupFiveName.text = modelArray[4]
+       
     }
     
     override func didReceiveMemoryWarning() {
