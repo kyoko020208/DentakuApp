@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import Social
 
-class FirstViewController: UIViewController, UIViewControllerTransitioningDelegate {
+class FirstViewController: UIViewController, UIViewControllerTransitioningDelegate, UITabBarDelegate {
     
     var CurrentSagaku: Int = 500
     
@@ -20,9 +21,13 @@ class FirstViewController: UIViewController, UIViewControllerTransitioningDelega
     
     var sumKingakuByGroup:[Int] = [0, 0, 0, 0, 0]
     
-    var i: Int = 1
+    var groupNames:[String] = ["グループ1","グループ2","グループ3","グループ4","グループ5"]
+    
+    var i: Int = 0
     
     var sumKingaku: Int = 0
+    
+    var sumNinzu: Int = 0
     
     var Sa: Int = 0
     
@@ -31,6 +36,17 @@ class FirstViewController: UIViewController, UIViewControllerTransitioningDelega
     var models:[String]!
     
     var numbers:[String]!
+    
+    let imageLock:UIImage = UIImage(named:"iconmonstr-lock-13-72")!
+    
+    let imageUnlock:UIImage = UIImage(named: "iconmonstr-lock-23-24")!
+    
+    var clickCount:[Int] = [0, 0, 0, 0, 0]
+    
+    var Lock: [Bool] = [false, false, false, false, false, false]
+    
+    
+    @IBOutlet weak var myTabBar: UITabBarItem!
     
     
     //各グループの人数・金額表示
@@ -68,7 +84,6 @@ class FirstViewController: UIViewController, UIViewControllerTransitioningDelega
     
     
     //グループ名
-    
     @IBOutlet weak var GroupOneName: UILabel!
     
     @IBOutlet weak var GroupTwoName: UILabel!
@@ -79,31 +94,66 @@ class FirstViewController: UIViewController, UIViewControllerTransitioningDelega
     
     @IBOutlet weak var GroupFiveName: UILabel!
     
-    @IBAction func Reset(_ sender: UIButton) {
-        for i in 0...4{
-            Ninzu[i] = 0
-            Kingaku[i] = 0
-        }
+    //ロックボタン
+    
+    @IBOutlet weak var lockBtnOne: UIButton!
+    
+    @IBOutlet weak var lockBtnTwo: UIButton!
+    
+    @IBOutlet weak var lockBtnThree: UIButton!
+    
+    @IBOutlet weak var ockBtnFour: UIButton!
+    
+    @IBOutlet weak var lockBtnFive: UIButton!
+    
+    //シェアボタン
+    
+    @IBAction func ShareBtn(_ sender: UIButton) {
+        //共有する項目
+        let shareText = "会計金額"
+        let activityItems = [shareText]
+        
+        //初期化処理
+        let activityVC = UIActivityViewController (activityItems: [shareText], applicationActivities: nil)
+        
+        //使用しないアクティビティタイプ
+        //        let excudedActivityTypes = [UIActivityType.postToFacebook, UIActivityType.postToTwitter,UIActivityType.saveToCameraRoll]
+        //
+        //
+        //        activityVC.excludedActivityTypes = excudedActivityTypes
+        
+        self.present(activityVC, animated:true, completion: nil)
     }
     
-    //
-    //    @IBAction func saveToMainViewController3 (segue: UIStoryboardSegue) {
-    //
-    //        let detailViewController = segue.source as! DetailTableViewController
-    //
-    //        let index = detailViewController.index
-    //
-    //        let modelString = detailViewController.editedModel
-    //
-    //        let numberString = detailViewController.editedNumber
-    //
-    //        models[index!] = modelString!
-    //
-    //        numbers[index!] = numberString!
-    //
-    //        GroupOneName.text = models[0]
-    //
-    //    }
+    //リセットボタン
+    @IBAction func Reset(_ sender: UIButton) {
+        for i in 0...4{
+            print(i)
+            Ninzu[i] = 0
+            Kingaku[i] = 0
+            GroupOneNunzu.text = "0"
+            GroupTwoNinzu.text = "0"
+            GroupThreeNinzu.text = "0"
+            GroupFourNinzu.text = "0"
+            GroupFiveNinzu.text = "0"
+            GroupOneKingaku.text = "0"
+            GroupTwoKingaku.text = "0"
+            GroupThreeKingaku.text = "0"
+            GroupFourKingaku.text = "0"
+            GroupFiveKingaku.text = "0"
+            SyukeiKingaku.text = "0"
+            GokeiKingaku.text = "0"
+            GokeiNinzu.text = "0"
+            Sagaku.text = "0"
+            sumKingaku = 0
+            sumKin = "0"
+            sumNinzu = 0
+            sumKingakuByGroup[i] = 0
+            
+            print(Ninzu[i])
+            print(Kingaku[i])
+        }
+    }
     
     
     //人数加算
@@ -122,17 +172,74 @@ class FirstViewController: UIViewController, UIViewControllerTransitioningDelega
         KingakuShow()
     }
     
+    //金額加算
     @IBAction func KingakuPlus(_ sender: UIButton) {
         i = sender.tag - 1
         KingakuPlus()
         KingakuShow()
     }
     
+    //金額減算
     @IBAction func KingakuMinus(_ sender: UIButton) {
         i = sender.tag - 1
         KingakuMinus()
         KingakuShow()
     }
+    
+    //ロックボタン
+    
+    @IBAction func lockBtn(_ sender: UIButton) {
+        switch sender.tag {
+        case 1:
+            if clickCount[i]%2 == 0 {
+                lockBtnOne.setImage(imageUnlock, for: UIControlState())
+                Lock[i] = true
+            } else {
+                lockBtnOne.setImage(imageLock, for: UIControlState())
+                Lock[i] = false
+            }
+            clickCount[i] = clickCount[i] + 1
+        case 2:
+            if clickCount[i]%2 == 0 {
+                lockBtnTwo.setImage(imageUnlock, for: UIControlState())
+                Lock[i] = true
+            } else {
+                lockBtnTwo.setImage(imageLock, for: UIControlState())
+                Lock[i] = false
+            }
+            clickCount[i] = clickCount[i] + 1
+        case 3:
+            if clickCount[i]%2 == 0 {
+                lockBtnThree.setImage(imageUnlock, for: UIControlState())
+                Lock[i] = true
+            } else {
+                lockBtnThree.setImage(imageLock, for: UIControlState())
+                Lock[i] = false
+            }
+            clickCount[i] = clickCount[i] + 1
+        case 4:
+            if clickCount[i]%2 == 0 {
+                ockBtnFour.setImage(imageUnlock, for: UIControlState())
+                Lock[i] = true
+            } else {
+                ockBtnFour.setImage(imageLock, for: UIControlState())
+                Lock[i] = false
+            }
+            clickCount[i] = clickCount[i] + 1
+        case 5:
+            if clickCount[i]%2 == 0 {
+                lockBtnFive.setImage(imageUnlock, for: UIControlState())
+                Lock[i] = true
+            } else {
+                lockBtnFive.setImage(imageLock, for: UIControlState())
+                Lock[i] = false
+            }
+            clickCount[i] = clickCount[i] + 1
+        default:
+            return
+        }
+    }
+    
     
     func NinzuPlus() {
         Ninzu[i] = Ninzu[i] + 1
@@ -147,15 +254,23 @@ class FirstViewController: UIViewController, UIViewControllerTransitioningDelega
     }
     
     func KingakuPlus() {
-        Kingaku[i] = Kingaku[i] + CurrentSagaku
+        if Lock[i] == false {
+            Kingaku[i] = Kingaku[i] + CurrentSagaku
+        } else {
+            Kingaku[i] = Kingaku[i]
+        }
     }
     
     func KingakuMinus() {
-        if Kingaku[i] > 0 {
+        if Lock[i] == false && Kingaku[i] > 0 {
             Kingaku[i] = Kingaku[i] - CurrentSagaku
         } else {
             Kingaku[i] = Kingaku[i]
         }
+    }
+    
+    func ImageSwitch() {
+        
     }
     
     
@@ -165,7 +280,7 @@ class FirstViewController: UIViewController, UIViewControllerTransitioningDelega
         SaKeisan()
     }
     
-
+    
     
     
     
@@ -215,7 +330,7 @@ class FirstViewController: UIViewController, UIViewControllerTransitioningDelega
         default:
             return
         }
-        let sumNinzu = Ninzu.reduce(0) {
+        sumNinzu = Ninzu.reduce(0) {
             (num1, num2) -> Int in
             num1 + num2
         }
@@ -227,19 +342,36 @@ class FirstViewController: UIViewController, UIViewControllerTransitioningDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        //        GroupOneName.text = modelArray[0]
-        //        GroupTwoName.text = modelArray[1]
-        //        GroupThreeName.text = modelArray[2]
-        //        GroupFourName.text = modelArray[3]
-        //        GroupFiveName.text = modelArray[4]
-       
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @IBAction func saveToMainViewController3 (segue: UIStoryboardSegue) {
+        
+        let mainTableViewController = segue.source as! MainTableViewController
+        
+        groupNames = mainTableViewController.models
+        
+        Ninzu = mainTableViewController.numbers
+        
+        CurrentSagaku = mainTableViewController.moneyValue
+
+        GroupOneName.text = groupNames[0]
+        GroupTwoName.text = groupNames[1]
+        GroupThreeName.text = groupNames[2]
+        GroupFourName.text = groupNames[3]
+        GroupFiveName.text = groupNames[4]
+        
+        GroupOneNunzu.text = String(Ninzu[0])
+        GroupTwoNinzu.text = String(Ninzu[1])
+        GroupThreeNinzu.text = String(Ninzu[2])
+        GroupFourNinzu.text = String(Ninzu[3])
+        GroupFiveNinzu.text = String(Ninzu[4])
+    }
+    
     
     
 }

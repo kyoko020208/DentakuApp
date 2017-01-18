@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D4478EDB1E237E5F00F17B98 /* TabBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4478EDA1E237E5F00F17B98 /* TabBarDelegate.swift */; };
 		D48451001E20EB74003B85C8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D48450FF1E20EB74003B85C8 /* Main.storyboard */; };
 		D48451021E21FB6A003B85C8 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48451011E21FB6A003B85C8 /* MainTableViewController.swift */; };
 		D48451041E220003003B85C8 /* DetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48451031E220003003B85C8 /* DetailTableViewController.swift */; };
@@ -42,7 +41,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D4478EDA1E237E5F00F17B98 /* TabBarDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarDelegate.swift; sourceTree = "<group>"; };
 		D48450FF1E20EB74003B85C8 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		D48451011E21FB6A003B85C8 /* MainTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
 		D48451031E220003003B85C8 /* DetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailTableViewController.swift; sourceTree = "<group>"; };
@@ -115,7 +113,6 @@
 			children = (
 				D48FE9241E13C16300B5CB63 /* AppDelegate.swift */,
 				D48450FF1E20EB74003B85C8 /* Main.storyboard */,
-				D4478EDA1E237E5F00F17B98 /* TabBarDelegate.swift */,
 				D484510D1E235029003B85C8 /* Detail2TableViewController.swift */,
 				D48451031E220003003B85C8 /* DetailTableViewController.swift */,
 				D48451011E21FB6A003B85C8 /* MainTableViewController.swift */,
@@ -291,7 +288,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D48451041E220003003B85C8 /* DetailTableViewController.swift in Sources */,
-				D4478EDB1E237E5F00F17B98 /* TabBarDelegate.swift in Sources */,
 				D4DA6E151E20AFB600447484 /* CalcViewController.swift in Sources */,
 				D4E4EA2E1E1514C5008EB011 /* Calc.swift in Sources */,
 				D48FE9291E13C16300B5CB63 /* SecondViewController.swift in Sources */,

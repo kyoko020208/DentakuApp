@@ -13,11 +13,13 @@ class MainTableViewController: UITableViewController {
     
     var models = ["グループ1", "グループ2", "グループ3","グループ4","グループ5"]
     
-    var numbers = ["0人", "0人", "0人", "0人", "0人"]
+    var numbers = [0, 0, 0, 0, 0]
     
     var moneytitle = ["グループ間差額"]
     
-    var money = ["500円"]
+    var money = [500]
+    
+    var moneyValue = 500
     
     var titles = ["グループ設定", "差額設定"]
     
@@ -39,6 +41,9 @@ class MainTableViewController: UITableViewController {
         
     }
     
+    
+    
+    
     @IBAction func saveToMainViewController2 (segue: UIStoryboardSegue) {
         
         let detailViewController2 = segue.source as! Detail2TableViewController
@@ -52,6 +57,8 @@ class MainTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -59,6 +66,7 @@ class MainTableViewController: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
     
     
     
@@ -82,10 +90,10 @@ class MainTableViewController: UITableViewController {
         
         if indexPath.section == 0 {
             cell.textLabel?.text = models[indexPath.row]
-            cell.detailTextLabel?.text = numbers[indexPath.row]
+            cell.detailTextLabel?.text = String(numbers[indexPath.row]) + "人"
         } else if indexPath.section == 1 {
             cell.textLabel?.text = moneytitle[indexPath.row]
-            cell.detailTextLabel?.text = money[indexPath.row]
+            cell.detailTextLabel?.text = String(money[indexPath.row]) + "円"
         }
         return cell
         
@@ -125,13 +133,18 @@ class MainTableViewController: UITableViewController {
             
             detailViewController2.index = path2?.row
             detailViewController2.moneyArray = money
+        } else if segue.identifier == "save3" {
+            moneyValue = money[0]
+//            let _moneyString :NSMutableString = NSMutableString(string: money[0])
+//            _moneyString.deleteCharacters(in: NSRange(location: _moneyString.length - 1, length: 1))
+//            money[0] = String(_moneyString)
+//            moneyValue = Int(money[0])!
+//            var i: Int = 0
+//            let _numberString :NSMutableString = NSMutableString(string: numbers[i])
+//            _numberString.deleteCharacters(in: NSRange(location: _numberString.length - 1, length: 1))
+//            numbers[i] = String(_numberString)
+//            numbersValue[i] = Int(numbers[i])!
         }
-//        print("Back2")
-//        let firstViewController2:FirstViewController = segue.destination as! FirstViewController
-//            
-//            firstViewController2.modelArray = self.models
-        
-
     }
-
+    
 }

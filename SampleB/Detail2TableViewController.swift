@@ -15,18 +15,27 @@ class Detail2TableViewController: UITableViewController, UIPickerViewDataSource,
     
     let pickerView = UIPickerView()
 
-    let SaValues = ["0円", "100円", "500円", "1000円", "2000円", "5000円"]
+    let SaValues = [0, 100, 500, 1000, 2000, 5000]
+    
+    var SaText: String = ""
+    
+    var SaText2: String = ""
+    
+    var Sa: Int = 500
     
     var index:Int?
     
-    var moneyArray:[String]!
+    var moneyArray:[Int]!
     
-    var editedMoney:String?
+    var editedMoney:Int?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        editMoneyTextField.text = moneyArray[index!]
+        
+        SaText = String(moneyArray[index!]) + "円"
+        
+        editMoneyTextField.text = SaText
         
         _setPcker()
             }
@@ -60,15 +69,20 @@ class Detail2TableViewController: UITableViewController, UIPickerViewDataSource,
         return SaValues.count
     }
     
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String {
         
-        return SaValues[row]
+        return String(SaValues[row]) + "円"
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         var row1: NSInteger = pickerView.selectedRow(inComponent: 0)
         
-        editMoneyTextField.text = String("\(SaValues[row1])")
+        SaText2 = String(SaValues[row1]) + "円"
+        print(SaText2)
+        
+        editMoneyTextField.text = SaText2
+        
+        Sa = SaValues[row1]
 
     }
     
@@ -86,7 +100,7 @@ class Detail2TableViewController: UITableViewController, UIPickerViewDataSource,
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "save2" {
-            editedMoney = editMoneyTextField.text
+            editedMoney = Sa
             
         }
         

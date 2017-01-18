@@ -10,6 +10,7 @@ import UIKit
 
 class DetailTableViewController: UITableViewController {
     
+    var numberValue: Int = 0
     
     @IBOutlet weak var editModelTextField: UITextField!
     
@@ -19,25 +20,26 @@ class DetailTableViewController: UITableViewController {
     @IBOutlet weak var uiStepper: UIStepper!
     
     @IBAction func uiChangeStepper(_ sender: UIStepper) {
-        editNumberTextField.text = String("\(Int(sender.value))" + "人")
+         numberValue = Int(sender.value)
+        editNumberTextField.text = String(Int(sender.value)) + "人"
     }
     
     var index:Int?
     
     var modelArray:[String]!
     
-    var numberArray:[String]!
+    var numberArray:[Int]!
     
     var editedModel:String?
     
-    var editedNumber:String?
+    var editedNumber:Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         editModelTextField.text = modelArray[index!]
         
-        editNumberTextField.text = numberArray[index!]
+        editNumberTextField.text = String(numberArray[index!]) + "人"
     }
     
     override func didReceiveMemoryWarning() {
@@ -69,7 +71,7 @@ class DetailTableViewController: UITableViewController {
         if segue.identifier == "save" {
             editedModel = editModelTextField.text
             
-            editedNumber = editNumberTextField.text
+            editedNumber = numberValue
         }
         
         
