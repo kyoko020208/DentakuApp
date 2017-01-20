@@ -13,16 +13,24 @@ import Foundation
 
 class FirstViewController: UIViewController, UIViewControllerTransitioningDelegate, UITabBarDelegate {
     
+    //金額プラス・マイナスを押した時に足し(引き)される金額
+    //Detail2TableViewControllerで設定した値と繋がる
     var CurrentSagaku: Int = 500
     
+    //CalcViewControllerで設定した合計値を引き継ぐ
     var sumKin: String = "0"
     
+    //各グループの設定人数
     var Ninzu:[Int] = [0, 0, 0, 0, 0]
     
+    //各グループの設定金額
     var Kingaku:[Int] = [0, 0, 0, 0, 0]
     
+    //各グループの合計金額
     var sumKingakuByGroup:[Int] = [0, 0, 0, 0, 0]
     
+    //グループの名称
+    //DetailTableViewControllerのmodelsと繋がる
     var groupNames:[String] = ["グループ1","グループ2","グループ3","グループ4","グループ5"]
     
     var i: Int = 0
