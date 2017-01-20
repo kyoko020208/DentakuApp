@@ -1,3 +1,4 @@
+
 //
 //  FirstViewController.swift
 //  SampleB
@@ -8,12 +9,13 @@
 
 import UIKit
 import Social
+import Foundation
 
 class FirstViewController: UIViewController, UIViewControllerTransitioningDelegate, UITabBarDelegate {
     
     var CurrentSagaku: Int = 500
     
-    var sumKin: String = ""
+    var sumKin: String = "0"
     
     var Ninzu:[Int] = [0, 0, 0, 0, 0]
     
@@ -44,6 +46,7 @@ class FirstViewController: UIViewController, UIViewControllerTransitioningDelega
     var clickCount:[Int] = [0, 0, 0, 0, 0]
     
     var Lock: [Bool] = [false, false, false, false, false, false]
+    
     
     
     @IBOutlet weak var myTabBar: UITabBarItem!
@@ -274,33 +277,38 @@ class FirstViewController: UIViewController, UIViewControllerTransitioningDelega
     }
     
     
+    func getCurrenctFormat(amount:Int) -> NSString {
+        let amountFormatter = NumberFormatter()
+        amountFormatter.numberStyle = .decimal
+        amountFormatter.groupingSeparator = ","
+        amountFormatter.groupingSize = 3
+        return amountFormatter.string(from: amount as NSNumber)! as NSString
+    }
     
     @IBAction func back(segue: UIStoryboardSegue) {
-        GokeiKingaku.text = sumKin
+        GokeiKingaku.text = getCurrenctFormat(amount:Int(sumKin)!) as String
         SaKeisan()
     }
     
     
-    
-    
-    
-    func SaKeisan() {
-        Sa = Int(GokeiKingaku.text!)! - sumKingaku
-        Sagaku.text = String(Sa)
-    }
-    
+
+        
     func KingakuShow() {
         switch i {
         case 0:
-            GroupOneKingaku.text = String(Kingaku[i])
+            GroupOneKingaku.text = getCurrenctFormat(amount: Kingaku[i]) as String
         case 1:
-            GroupTwoKingaku.text = String(Kingaku[i])
+            GroupTwoKingaku.text = getCurrenctFormat(amount: Kingaku[i]) as String
+
         case 2:
-            GroupThreeKingaku.text = String(Kingaku[i])
+            GroupThreeKingaku.text = getCurrenctFormat(amount: Kingaku[i]) as String
+
         case 3:
-            GroupFourKingaku.text = String(Kingaku[i])
+            GroupFourKingaku.text = getCurrenctFormat(amount: Kingaku[i]) as String
+
         case 4:
-            GroupFiveKingaku.text = String(Kingaku[i])
+            GroupFiveKingaku.text = getCurrenctFormat(amount: Kingaku[i]) as String
+
         default:
             return
         }
@@ -309,10 +317,12 @@ class FirstViewController: UIViewController, UIViewControllerTransitioningDelega
             (num1, num2) -> Int in
             num1 + num2
         }
-        SyukeiKingaku.text = String(sumKingaku)
+        SyukeiKingaku.text = getCurrenctFormat(amount: sumKingaku) as String
+
         SaKeisan()
     }
     
+
     
     
     func NinzuShow() {
@@ -335,10 +345,16 @@ class FirstViewController: UIViewController, UIViewControllerTransitioningDelega
             num1 + num2
         }
         GokeiNinzu.text = String(sumNinzu)
-        SyukeiKingaku.text = String(sumKingaku)
-        //            String(sumKingaku)
+        SyukeiKingaku.text = getCurrenctFormat(amount: sumKingaku) as String
+
         SaKeisan()
     }
+    
+    func SaKeisan() {
+        Sa = Int(sumKin)! - sumKingaku
+        Sagaku.text = getCurrenctFormat(amount:Sa) as String
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -348,6 +364,8 @@ class FirstViewController: UIViewController, UIViewControllerTransitioningDelega
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
     
     @IBAction func saveToMainViewController3 (segue: UIStoryboardSegue) {
         

@@ -11,7 +11,7 @@ import UIKit
 class MainTableViewController: UITableViewController {
     
     
-    var models = ["グループ1", "グループ2", "グループ3","グループ4","グループ5"]
+    var models = ["部長", "課長", "主査","担当","遅れてきた人"]
     
     var numbers = [0, 0, 0, 0, 0]
     

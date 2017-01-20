@@ -9,6 +9,9 @@
 import Foundation
 
 class Calc {
+    
+    let firstView = FirstViewController()
+    
     //ユーザが押した数値
     var InputNum: String = ""
     

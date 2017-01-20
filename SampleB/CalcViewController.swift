@@ -12,6 +12,8 @@ class CalcViewController: UIViewController {
     
     let calc = Calc()
     
+    let firstView = FirstViewController()
+    
     @IBOutlet weak var Formula: UILabel!
     
     @IBOutlet weak var Result: UILabel!
@@ -20,9 +22,7 @@ class CalcViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
+
     }
     
     override func didReceiveMemoryWarning() {
