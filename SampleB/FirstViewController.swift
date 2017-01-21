@@ -1,12 +1,3 @@
-
-//
-//  FirstViewController.swift
-//  SampleB
-//
-//  Created by Kyoko Otsuka on 2016/12/28.
-//  Copyright © 2016年 Kyoko Otsuka. All rights reserved.
-//
-
 import UIKit
 import Social
 import Foundation
@@ -57,6 +48,7 @@ class FirstViewController: UIViewController, UIViewControllerTransitioningDelega
     //金額ロック中か否か
     var Lock: [Bool] = [false, false, false, false, false, false]
     
+    @IBOutlet weak var myTabBar: UITabBarItem!
     
     //各グループの人数・金額表示
     @IBOutlet weak var GroupOneNunzu: UILabel!
@@ -316,7 +308,7 @@ class FirstViewController: UIViewController, UIViewControllerTransitioningDelega
         SaKeisan()
     }
     
-
+    
     
     //各グループの人数と合計人数を表示
     func NinzuShow() {
@@ -349,42 +341,69 @@ class FirstViewController: UIViewController, UIViewControllerTransitioningDelega
         Sagaku.text = getCurrenctFormat(amount:Sa) as String
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    
-    //MainViewControllerの値を持ってくる
-    @IBAction func saveToMainViewController3 (segue: UIStoryboardSegue) {
         
-        let mainTableViewController = segue.source as! MainTableViewController
+        //初期値を全開保存したもの
+        var groupNames: [String] = []
+        var Ninzu: [Int] = []
+        var currentSagaku: Int = 0
         
-        groupNames = mainTableViewController.models
+        let ud11 = UserDefaults.standard
         
-        Ninzu = mainTableViewController.numbers
         
-        CurrentSagaku = mainTableViewController.moneyValue
-
+        var udID1 = ud11.object(forKey: "NAMES") as! [String]
+        var nameString: AnyObject
+        for nameString in udID1{
+            //配列に追加していく
+            groupNames.append(nameString as String)
+        }
         GroupOneName.text = groupNames[0]
-        GroupTwoName.text = groupNames[1]
-        GroupThreeName.text = groupNames[2]
-        GroupFourName.text = groupNames[3]
-        GroupFiveName.text = groupNames[4]
-        
-        GroupOneNunzu.text = String(Ninzu[0])
-        GroupTwoNinzu.text = String(Ninzu[1])
-        GroupThreeNinzu.text = String(Ninzu[2])
-        GroupFourNinzu.text = String(Ninzu[3])
-        GroupFiveNinzu.text = String(Ninzu[4])
+        if (ud11.object(forKey: "NAMES") != nil) {
+            GroupTwoName.text = groupNames[1]
+            GroupThreeName.text = groupNames[2]
+            GroupFourName.text = groupNames[3]
+            GroupFiveName.text = groupNames[4]
+        }
     }
     
-    
-    
+        
+        override func didReceiveMemoryWarning() {
+            super.didReceiveMemoryWarning()
+            // Dispose of any resources that can be recreated.
+        }
+        
+        
+        
+        //MainViewControllerの値を持ってくる
+        @IBAction func saveToMainViewController3 (segue: UIStoryboardSegue) {
+            
+            let mainTableViewController = segue.source as! MainTableViewController
+            
+            
+            groupNames = mainTableViewController.models
+            
+            Ninzu = mainTableViewController.numbers
+            
+            CurrentSagaku = mainTableViewController.moneyValue
+            
+            let ud1 = UserDefaults.standard
+            ud1.set(groupNames, forKey: "NAMES")
+            
+            
+            GroupOneName.text = groupNames[0]
+            GroupTwoName.text = groupNames[1]
+            GroupThreeName.text = groupNames[2]
+            GroupFourName.text = groupNames[3]
+            GroupFiveName.text = groupNames[4]
+            
+            GroupOneNunzu.text = String(Ninzu[0])
+            GroupTwoNinzu.text = String(Ninzu[1])
+            GroupThreeNinzu.text = String(Ninzu[2])
+            GroupFourNinzu.text = String(Ninzu[3])
+            GroupFiveNinzu.text = String(Ninzu[4])
+        }
+        
+        
+        
 }
-

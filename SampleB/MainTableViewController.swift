@@ -1,11 +1,3 @@
-//
-//  MainTableViewController.swift
-//  SampleB
-//
-//  Created by Kyoko Otsuka on 2017/01/08.
-//  Copyright © 2017年 Kyoko Otsuka. All rights reserved.
-//
-
 import UIKit
 
 class MainTableViewController: UITableViewController {
@@ -143,6 +135,7 @@ class MainTableViewController: UITableViewController {
             detailViewController2.moneyArray = money
         } else if segue.identifier == "save3" {
             moneyValue = money[0]
+            
         }
     }
     
