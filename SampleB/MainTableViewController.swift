@@ -10,19 +10,24 @@ import UIKit
 
 class MainTableViewController: UITableViewController {
     
-    
+    //グループ名称の初期値
     var models = ["部長", "課長", "主査","担当","遅れてきた人"]
     
+    //グループ人数の初期値
     var numbers = [0, 0, 0, 0, 0]
     
+    //＋ーを押した時の値のタイトル
     var moneytitle = ["グループ間差額"]
     
+    //＋ーを押した時の値
     var money = [500]
     
     var moneyValue = 500
     
+    //表のタイトル
     var titles = ["グループ設定", "差額設定"]
     
+    //DetailTableViewCOntrollerからの値の引き継ぎ
     @IBAction func saveToMainViewController (segue: UIStoryboardSegue) {
         
         let detailViewController = segue.source as! DetailTableViewController
@@ -43,7 +48,7 @@ class MainTableViewController: UITableViewController {
     
     
     
-    
+    //DetailViewController2からの値の引き継ぎ
     @IBAction func saveToMainViewController2 (segue: UIStoryboardSegue) {
         
         let detailViewController2 = segue.source as! Detail2TableViewController
@@ -69,11 +74,12 @@ class MainTableViewController: UITableViewController {
     
     
     
-    
+    //セクション数
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
     
+    //行数
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0{
             return models.count
@@ -84,6 +90,7 @@ class MainTableViewController: UITableViewController {
         }
     }
     
+    //CEllデータ
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         tableView.tableFooterView = UIView()
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
@@ -96,14 +103,14 @@ class MainTableViewController: UITableViewController {
             cell.detailTextLabel?.text = String(money[indexPath.row]) + "円"
         }
         return cell
-        
-        
     }
     
+    //セクションタイトル
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return titles[section]
     }
     
+    //Cellが押された時の画面遷移
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 && (indexPath.row == 0 || indexPath.row == 1 || indexPath.row == 2 || indexPath.row == 3 || indexPath.row == 4 ) {
             performSegue(withIdentifier: "Edit", sender: nil)
@@ -115,6 +122,7 @@ class MainTableViewController: UITableViewController {
         
     }
     
+    //DetailViewController/DetailViewCOntroller2にセルの値を引き継ぐ
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "Edit"{
             var path = tableView.indexPathForSelectedRow
@@ -135,15 +143,6 @@ class MainTableViewController: UITableViewController {
             detailViewController2.moneyArray = money
         } else if segue.identifier == "save3" {
             moneyValue = money[0]
-//            let _moneyString :NSMutableString = NSMutableString(string: money[0])
-//            _moneyString.deleteCharacters(in: NSRange(location: _moneyString.length - 1, length: 1))
-//            money[0] = String(_moneyString)
-//            moneyValue = Int(money[0])!
-//            var i: Int = 0
-//            let _numberString :NSMutableString = NSMutableString(string: numbers[i])
-//            _numberString.deleteCharacters(in: NSRange(location: _numberString.length - 1, length: 1))
-//            numbers[i] = String(_numberString)
-//            numbersValue[i] = Int(numbers[i])!
         }
     }
     

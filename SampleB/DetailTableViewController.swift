@@ -10,19 +10,16 @@ import UIKit
 
 class DetailTableViewController: UITableViewController {
     
+    //人数の数値格納用
     var numberValue: Int = 0
     
+    //グループ名称編集用の箱
     @IBOutlet weak var editModelTextField: UITextField!
     
-    
+    //グループにんずう編集用の箱
     @IBOutlet weak var editNumberTextField: UILabel!
     
     @IBOutlet weak var uiStepper: UIStepper!
-    
-    @IBAction func uiChangeStepper(_ sender: UIStepper) {
-         numberValue = Int(sender.value)
-        editNumberTextField.text = String(Int(sender.value)) + "人"
-    }
     
     var index:Int?
     
@@ -34,9 +31,16 @@ class DetailTableViewController: UITableViewController {
     
     var editedNumber:Int?
     
+    //stepperで人数を加減
+    @IBAction func uiChangeStepper(_ sender: UIStepper) {
+        numberValue = Int(sender.value)
+        editNumberTextField.text = String(Int(sender.value)) + "人"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //まずMainTableViewControllerからの値を設置
         editModelTextField.text = modelArray[index!]
         
         editNumberTextField.text = String(numberArray[index!]) + "人"
@@ -67,6 +71,7 @@ class DetailTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    //MainTabelViewCOntrollerに値を引き継ぐ
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "save" {
             editedModel = editModelTextField.text

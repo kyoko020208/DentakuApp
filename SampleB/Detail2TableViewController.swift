@@ -10,13 +10,15 @@ import UIKit
 
 class Detail2TableViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate {
 
-    
+    //金額編集用
     @IBOutlet weak var editMoneyTextField: UILabel!
     
     let pickerView = UIPickerView()
 
+    //差金額格納用
     let SaValues = [0, 100, 500, 1000, 2000, 5000]
     
+    //単位付きでpickerには表示
     var SaText: String = ""
     
     var SaText2: String = ""
@@ -33,6 +35,7 @@ class Detail2TableViewController: UITableViewController, UIPickerViewDataSource,
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //初期値をセット
         SaText = String(moneyArray[index!]) + "円"
         
         editMoneyTextField.text = SaText
@@ -85,17 +88,6 @@ class Detail2TableViewController: UITableViewController, UIPickerViewDataSource,
         Sa = SaValues[row1]
 
     }
-    
-//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        editedMoneyTextField.
-//        
-//    }
-//    
-//    
-//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-//        _ = self.pickerView(pickerView, titleForRow: pickerView.selectedRow(inComponent: 0), forComponent: 0)
-//        return editedMoney
-//    }
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

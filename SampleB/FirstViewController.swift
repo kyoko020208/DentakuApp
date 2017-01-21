@@ -33,31 +33,29 @@ class FirstViewController: UIViewController, UIViewControllerTransitioningDelega
     //DetailTableViewControllerのmodelsと繋がる
     var groupNames:[String] = ["グループ1","グループ2","グループ3","グループ4","グループ5"]
     
+    //配列番号
     var i: Int = 0
     
+    //sumKingakuByGroupの合計
     var sumKingaku: Int = 0
     
+    //人数合計
     var sumNinzu: Int = 0
     
+    //合計金額ー集計金額
     var Sa: Int = 0
     
-    var index: Int?
-    
-    var models:[String]!
-    
-    var numbers:[String]!
-    
+    //金額ロック中イメージ
     let imageLock:UIImage = UIImage(named:"iconmonstr-lock-13-72")!
     
+    //金額アンロック中イメージ
     let imageUnlock:UIImage = UIImage(named: "iconmonstr-lock-23-24")!
     
+    //ロックイメージのクリック回数カウント
     var clickCount:[Int] = [0, 0, 0, 0, 0]
     
+    //金額ロック中か否か
     var Lock: [Bool] = [false, false, false, false, false, false]
-    
-    
-    
-    @IBOutlet weak var myTabBar: UITabBarItem!
     
     
     //各グループの人数・金額表示
@@ -75,9 +73,7 @@ class FirstViewController: UIViewController, UIViewControllerTransitioningDelega
     
     @IBOutlet weak var GroupFourNinzu: UILabel!
     
-    
     @IBOutlet weak var GroupFourKingaku: UILabel!
-    
     
     @IBOutlet weak var GroupFiveNinzu: UILabel!
     
@@ -106,7 +102,6 @@ class FirstViewController: UIViewController, UIViewControllerTransitioningDelega
     @IBOutlet weak var GroupFiveName: UILabel!
     
     //ロックボタン
-    
     @IBOutlet weak var lockBtnOne: UIButton!
     
     @IBOutlet weak var lockBtnTwo: UIButton!
@@ -118,7 +113,6 @@ class FirstViewController: UIViewController, UIViewControllerTransitioningDelega
     @IBOutlet weak var lockBtnFive: UIButton!
     
     //シェアボタン
-    
     @IBAction func ShareBtn(_ sender: UIButton) {
         //共有する項目
         let shareText = "会計金額"
@@ -198,7 +192,6 @@ class FirstViewController: UIViewController, UIViewControllerTransitioningDelega
     }
     
     //ロックボタン
-    
     @IBAction func lockBtn(_ sender: UIButton) {
         switch sender.tag {
         case 1:
@@ -251,11 +244,12 @@ class FirstViewController: UIViewController, UIViewControllerTransitioningDelega
         }
     }
     
-    
+    //人数加算計算
     func NinzuPlus() {
         Ninzu[i] = Ninzu[i] + 1
     }
     
+    //人数減算計算
     func NinzuMinus() {
         if Ninzu[i] > 0 {
             Ninzu[i] = Ninzu[i] - 1
@@ -264,6 +258,7 @@ class FirstViewController: UIViewController, UIViewControllerTransitioningDelega
         }
     }
     
+    //金額加算計算
     func KingakuPlus() {
         if Lock[i] == false {
             Kingaku[i] = Kingaku[i] + CurrentSagaku
@@ -272,6 +267,7 @@ class FirstViewController: UIViewController, UIViewControllerTransitioningDelega
         }
     }
     
+    //金額減算計算
     func KingakuMinus() {
         if Lock[i] == false && Kingaku[i] > 0 {
             Kingaku[i] = Kingaku[i] - CurrentSagaku
@@ -280,11 +276,7 @@ class FirstViewController: UIViewController, UIViewControllerTransitioningDelega
         }
     }
     
-    func ImageSwitch() {
-        
-    }
-    
-    
+    //数値を金額っぽく見せる
     func getCurrenctFormat(amount:Int) -> NSString {
         let amountFormatter = NumberFormatter()
         amountFormatter.numberStyle = .decimal
@@ -293,30 +285,25 @@ class FirstViewController: UIViewController, UIViewControllerTransitioningDelega
         return amountFormatter.string(from: amount as NSNumber)! as NSString
     }
     
+    //CalcViewControllerから計算結果を持ってくる
     @IBAction func back(segue: UIStoryboardSegue) {
         GokeiKingaku.text = getCurrenctFormat(amount:Int(sumKin)!) as String
         SaKeisan()
     }
     
-    
-
-        
+    //各グループの金額と集計金額を表示
     func KingakuShow() {
         switch i {
         case 0:
             GroupOneKingaku.text = getCurrenctFormat(amount: Kingaku[i]) as String
         case 1:
             GroupTwoKingaku.text = getCurrenctFormat(amount: Kingaku[i]) as String
-
         case 2:
             GroupThreeKingaku.text = getCurrenctFormat(amount: Kingaku[i]) as String
-
         case 3:
             GroupFourKingaku.text = getCurrenctFormat(amount: Kingaku[i]) as String
-
         case 4:
             GroupFiveKingaku.text = getCurrenctFormat(amount: Kingaku[i]) as String
-
         default:
             return
         }
@@ -326,13 +313,12 @@ class FirstViewController: UIViewController, UIViewControllerTransitioningDelega
             num1 + num2
         }
         SyukeiKingaku.text = getCurrenctFormat(amount: sumKingaku) as String
-
         SaKeisan()
     }
     
 
     
-    
+    //各グループの人数と合計人数を表示
     func NinzuShow() {
         switch i {
         case 0:
@@ -354,10 +340,10 @@ class FirstViewController: UIViewController, UIViewControllerTransitioningDelega
         }
         GokeiNinzu.text = String(sumNinzu)
         SyukeiKingaku.text = getCurrenctFormat(amount: sumKingaku) as String
-
         SaKeisan()
     }
     
+    //差額計算と表示
     func SaKeisan() {
         Sa = Int(sumKin)! - sumKingaku
         Sagaku.text = getCurrenctFormat(amount:Sa) as String
@@ -374,7 +360,7 @@ class FirstViewController: UIViewController, UIViewControllerTransitioningDelega
     }
     
     
-    
+    //MainViewControllerの値を持ってくる
     @IBAction func saveToMainViewController3 (segue: UIStoryboardSegue) {
         
         let mainTableViewController = segue.source as! MainTableViewController
